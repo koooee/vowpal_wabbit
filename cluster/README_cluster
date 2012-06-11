@@ -38,10 +38,7 @@ Connect to the span server node for the Hadoop cluster:
 
 Start the map-reduce job using Hadoop streaming: 
 
-hadoop jar $HADOOP_HOME/hadoop-streaming.jar
--Dmapred.job.map.memory.mb=2500 -input <input> -output <output> -file
-vw -file runvw.sh -mapper 'runvw.sh <output> <span_server>' -reducer
-NONE
+hadoop jar $HADOOP_HOME/hadoop-streaming.jar -Dmapred.job.map.memory.mb=2500 -input <input> -output <output> -file vw -file runvw.sh -mapper 'runvw.sh <output> <span_server>' -reducer NONE
 
 where <output> is the directory on HDFS where you want the trained
 model to be saved and <span_server> is the hostname of the gateway where
