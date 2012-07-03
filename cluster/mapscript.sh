@@ -9,10 +9,10 @@ maprem=`expr $total % $nmappers`
 mapsize=`expr $mapsize + $maprem`
 mapsize=`expr $mapsize + 100`
 echo $mapsize
-./spanning_tree
-hadoop jar $HADOOP_HOME/hadoop-streaming.jar \
--Dmapred.job.queue.name=search \
+spanning_tree
+hadoop jar $HADOOP_HOME/contrib/streaming/hadoop-streaming*.jar \
 -Dmapred.min.split.size=$mapsize \
+-Dmapred.map.tasks=$nmappers \
 -Dmapred.map.tasks.speculative.execution=true \
 -Dmapred.reduce.tasks=0 \
 -Dmapred.job.map.memory.mb=3000 \
@@ -20,7 +20,7 @@ hadoop jar $HADOOP_HOME/hadoop-streaming.jar \
 -Dmapred.task.timeout=600000000 \
 -input $in_directory \
 -output $out_directory \
--file ../vw \
+-file /usr/local/bin/vw \
 -file runvw.sh \
 -mapper runvw.sh \
 -reducer NONE
